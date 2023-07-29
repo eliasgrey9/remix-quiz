@@ -1,0 +1,18 @@
+* {
+  margin: 0;
+}
+
+.body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: lightgray;
+}
+
+.quizContainer {
+  width: 600px;
+  height: 600px;
+  border: solid black 1px;
+}
