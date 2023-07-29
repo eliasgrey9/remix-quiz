@@ -63,6 +63,7 @@
   font-size: 20px;
 }
 .beginBtn:hover {
+  cursor: pointer;
   transition: ease-in 0.5s;
   border: solid black 1px;
   background-color: white;
