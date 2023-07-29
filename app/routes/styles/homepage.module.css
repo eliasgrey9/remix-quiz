@@ -1,18 +1,215 @@
 * {
   margin: 0;
 }
-
+/*The whole app body*/
 .body {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background-color: lightgray;
+  background-color: rgb(245, 245, 245);
 }
 
+/*The quiz contents reside here*/
 .quizContainer {
-  width: 600px;
-  height: 600px;
-  border: solid black 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 700px;
+  height: 700px;
+  border: solid lightblue 3px;
+  border-radius: 5px;
+  background-color: lightblue;
+  padding: 10px;
 }
+
+/*(START) The beginning screen of the quiz*/
+.beginningContainer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background-color: lightblue;
+}
+.beginHeading {
+  font-size: 30px;
+  font-weight: bold;
+  width: 50%;
+  text-align: center;
+  text-align: center;
+}
+
+.beginQustion {
+  width: 50%;
+  text-align: center;
+}
+
+.beginSubHeading {
+  font-size: 20px;
+  width: 50%;
+  font-weight: 300;
+  text-align: center;
+}
+
+.beginBtn {
+  width: 150px;
+  height: 40px;
+  border-radius: 5px;
+  border: solid 3px white;
+  cursor: pointer;
+  font-size: 20px;
+}
+.beginBtn:hover {
+  transition: ease-in 0.5s;
+  border: solid black 1px;
+  background-color: white;
+}
+/*(END) The beginning screen of the quiz*/
+
+/*(START) The questions screen of the quiz*/
+.triviaCard {
+  width: 500px;
+  height: 250px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.6);
+  background-color: rgb(215, 192, 221);
+}
+.questionAnswerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60%;
+}
+
+.questionsCategory {
+  width: 100%;
+  height: 20%;
+  text-align: center;
+  padding: 5px;
+}
+
+.singleQuestion {
+  word-wrap: break-word;
+  width: 50%;
+  font-style: italic;
+  padding: 15px;
+}
+
+.trueOrFalseBtnsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 40%;
+  height: 100%;
+  padding: 15px;
+}
+.trueOrFalseBtns {
+  height: 35px;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: ease-in 0.25s;
+  border: solid lightblue 2px;
+  font-weight: bold;
+}
+.trueOrFalseBtns:hover {
+  background-color: rgb(76, 188, 225);
+  color: white;
+}
+.questionCounter {
+  width: 100%;
+  height: 10%;
+  padding-left: 10px;
+  font-weight: bold;
+  font-size: 16px;
+}
+/*(END) The questions screen of the quiz*/
+
+/*(START) The end of quiz screen */
+.endQuizContainer {
+  height: 100%;
+}
+.endQuizHeading {
+  height: 10%;
+  width: 100%;
+  font-weight: bold;
+  font-size: 24px;
+  text-align: center;
+}
+.legend {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px; /* Add some space at the bottom to separate it from the questions */
+}
+
+/* Styles for the little boxes */
+.greenLegendBox {
+  width: 20px;
+  height: 20px;
+  margin: 0px 10px; /* Add some space between the box and the text */
+  border-radius: 3px;
+  background-color: rgb(211, 255, 211);
+}
+.redLegendBox {
+  width: 20px;
+  height: 20px;
+  margin: 0px 10px; /* Add some space between the box and the text */
+  border-radius: 3px;
+  background-color: rgb(255, 182, 182);
+}
+.endQuizQuestions {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 75%;
+}
+.incorrectAnswers {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  border: solid 3px rgb(255, 182, 182);
+  border-radius: 7px;
+  font-weight: bold;
+  background-color: white;
+  padding: 4px;
+}
+
+.correctAnswers {
+  margin: 2px;
+  padding: 4px;
+
+  display: flex;
+  align-items: center;
+  height: 40px;
+  border: solid 3px rgb(211, 255, 211);
+  font-weight: bold;
+  background-color: white;
+  border-radius: 7px;
+}
+
+.endQuizBtnContainer {
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  width: 100%;
+  height: 10%;
+}
+
+.endBtn {
+  margin: 10px;
+  width: 150px;
+  height: 40px;
+  border-radius: 5px;
+  border: solid 1px white;
+  cursor: pointer;
+  font-size: 20px;
+}
+.endBtn:hover {
+  transition: ease-in 0.5s;
+  border: solid black 1px;
+  background-color: white;
+}
+
+/*(END) The end of quiz screen */
