@@ -23,8 +23,14 @@ export default function Quiz() {
     END_OF_QUIZ: "END_OF_QUIZ",
   };
   const [questionsArray, setQuestionsArray] = useState<QuestionStructure[]>([]);
-  const [currentQuestionIndex, setCurrentQuestionIndexArray] = useState(0);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [quizStatus, setQuizStatus] = useState(quizStatuses.BEGINNING_OF_QUIZ);
+  const [correctAnswersIndexes, setCorrectAnswersIndexes] = useState<
+    Array<Number>
+  >([]);
+  const [incorrectAnswersIndexes, setIncorrectAnswersIndexes] = useState<
+    Array<Number>
+  >([]);
 
   //I will use these booleans to give my ternary operators the decision to 'display or not display'
   const isBeginningOfQuizActive: boolean =
@@ -33,8 +39,7 @@ export default function Quiz() {
     quizStatus === quizStatuses.QUIZ_QUESTION;
   const isEndOfQuizActive: boolean = quizStatus === quizStatuses.END_OF_QUIZ;
 
-  //fetch the questions once the user begins the quiz
-
+  //fetch the questions once the page loads
   useEffect(() => {
     const fetchTriviaQuestions = async () => {
       const url =
@@ -52,9 +57,14 @@ export default function Quiz() {
     fetchTriviaQuestions();
   }, []);
 
-  const handleNextQuestion = () => {
+  const handleAnswer = (bool: string) => {
+    if (questionsArray[currentQuestionIndex].correct_answer === bool) {
+      setCorrectAnswersIndexes((arr) => [...arr, currentQuestionIndex]);
+    } else {
+      setIncorrectAnswersIndexes((arr) => [...arr, currentQuestionIndex]);
+    }
     if (currentQuestionIndex < questionsArray.length - 1) {
-      setCurrentQuestionIndexArray(currentQuestionIndex + 1);
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
       setQuizStatus(quizStatuses.END_OF_QUIZ);
     }
@@ -62,9 +72,12 @@ export default function Quiz() {
 
   const endQuiz = () => {
     setQuizStatus(quizStatuses.BEGINNING_OF_QUIZ);
-    setCurrentQuestionIndexArray(0);
+    setCurrentQuestionIndex(0);
+    setCorrectAnswersIndexes([]);
+    setIncorrectAnswersIndexes([]);
   };
-
+  console.log("Correct IDX", correctAnswersIndexes);
+  console.log("Incorrect IDX", incorrectAnswersIndexes);
   return (
     <div className={style.body}>
       <div className={style.quizContainer}>
@@ -84,14 +97,28 @@ export default function Quiz() {
           <div>
             <h2>{questionsArray[currentQuestionIndex]?.category}</h2>
             <p>{questionsArray[currentQuestionIndex]?.question}</p>
-            Render buttons for True/False answers and handle user input
-            <button onClick={handleNextQuestion}>Next Question</button>
+            <button onClick={() => handleAnswer("True")}>True</button>
+            <button onClick={() => handleAnswer("False")}>False</button>
           </div>
         ) : null}
 
         {isEndOfQuizActive ? (
           <div>
-            END OF QUIZ
+            {questionsArray.map((question, index) => (
+              <div
+                key={question.question}
+                style={{
+                  backgroundColor: correctAnswersIndexes.includes(index)
+                    ? "green"
+                    : incorrectAnswersIndexes.includes(index)
+                    ? "red"
+                    : "black",
+                }}
+              >
+                {question.question}
+              </div>
+            ))}
+
             <button
               onClick={() => {
                 endQuiz();
