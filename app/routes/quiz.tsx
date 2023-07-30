@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import style from "./styles/homepage.module.css";
 import axios from "axios";
 
-//This interface assigns the types we need to to extract the expected structure and types of the question object.
 export default function Quiz() {
   //Key value pairs will be used to determine what screen is rendered by conditionally plugging a single key/value into quizStatus useState.
   const quizStatuses = {
@@ -18,10 +17,8 @@ export default function Quiz() {
   const [correctAnswersIndexes, setCorrectAnswersIndexes] = useState<
     Array<Number>
   >([]);
-  // const [incorrectAnswersIndexes, setIncorrectAnswersIndexes] = useState<
-  //   Array<Number>
-  // >([]);
 
+  //Assigns the types the the key value pairs for typescripts readability.
   interface QuestionStructure {
     category: string;
     type: string;
@@ -58,11 +55,12 @@ export default function Quiz() {
 
   //Checks user's answer, update state, and move to next question.
   const handleAnswer = (bool: string) => {
+    //If user answer matches correct answer we save the index of the question.
     if (questionsArray[currentQuestionIndex].correct_answer === bool) {
       setCorrectAnswersIndexes((arr) => [...arr, currentQuestionIndex]);
-    } else {
-      // setIncorrectAnswersIndexes((arr) => [...arr, currentQuestionIndex]);
     }
+
+    //We move to the next question or end the quiz here depending on what index we are on.
     if (currentQuestionIndex < questionsArray.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
@@ -75,7 +73,6 @@ export default function Quiz() {
     setQuizStatus(quizStatuses.BEGINNING_OF_QUIZ);
     setCurrentQuestionIndex(0);
     setCorrectAnswersIndexes([]);
-    // setIncorrectAnswersIndexes([]);
   };
 
   return (
